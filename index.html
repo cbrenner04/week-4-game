@@ -5,10 +5,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Star Wars RPG</title>
   <link rel="stylesheet" href="assets/css/reset.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cyborg/bootstrap.min.css" rel="stylesheet" integrity="sha384-D9XILkoivXN+bcvB2kSOowkIvIcBbNdoDQvfBNsxYAIieZbx8/SI4NeUvrRGCpDi" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="assets/javascript/game.js"></script>
 </head>
 <body>
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-md-4 col-md-push-8">
+        <h1>Star Wars RPG</h1>
+      </div>
+
+      <div class="col-md-8 col-md-pull-4">
+
+        <div class="row available-characters">
+          <h2 class="directions">choose a character...</h2>
+
+          <div class="col-xs-6 col-sm-3 character">
+            <div class="thumbnail vader" value=120>
+              <img src="assets/images/darth_vader.jpg" alt="darth vader icon">
+              <div class="caption">
+                <h5 class="text-info">Darth Vader</h5>
+                <p>HP: 120</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6 col-sm-3 character">
+            <div class="thumbnail skywalker" value=100>
+              <img src="assets/images/luke_skywalker.jpg" alt="luke skywalker icon">
+              <div class="caption">
+                <h5 class="text-info">Luke Skywalker</h5>
+                <p>HP: 100</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6 col-sm-3 character">
+            <div class="thumbnail kenobi" value=90>
+              <img src="assets/images/obi_wan.jpg" alt="obi wan icon">
+              <div class="caption">
+                <h5 class="text-info">Obi-wan Kenobi</h5>
+                <p>HP: 90</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-6 col-sm-3 character">
+            <div class="thumbnail palpatine" value=105>
+              <img src="assets/images/emperor_palpatine.jpg" alt="emperor palpatine icon">
+              <div class="caption">
+                <h5 class="text-info">Emperor Palpatine</h5>
+                <p>HP: 105</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="your-character hidden">
+              <h2>Your Character</h2>
+            </div>
+          </div>
+
+          <div class="col-xs-6">
+            <div class="defender hidden">
+              <h2>Defender</h2>
+              <button class="btn btn-default attack pull-left">Attack</button>
+              <br class="visible-xs">
+              <br class="visible-xs">
+              <br class="visible-xs">
+            </div>
+          </div>
+        </div>
+
+        <div class="row enemy-characters hidden">
+          <h2>Enemies Available to Attack</h2>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </body>
 </html>
