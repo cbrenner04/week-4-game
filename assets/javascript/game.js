@@ -1,42 +1,27 @@
 // game play
 
-/*
-listen for click of .attack
-  when attack is selected,
-    reduce yourCharacterHealth by defenderAttack amount
-    increase yourCharacterExperience
-    increase yourCharacterAttack based on yourCharacterExperience
-    reduce defenderHealth by yourCharacterAttack
-
-if yourCharacterHealth reaches 0
-  you lose
-  move all characters back to .available-characters
-  reset all variables
-
-if defenderHealth reaches 0
-  remove defender from game
-  allow for new defender to be selected
-
-if all defenders are removed you win
- */
-
-// initialize
+// wait for document to load
 $(document).ready(function() {
   // variables
+  var yourCharacter;
+  var defender;
   var yourCharacterHealth;
-  var yourCharacterExperience;
+  var yourCharacterExperience = 0;
   var yourCharacterAttack;
   var defenderHealth;
   var defenderAttack;
 
   // listen for click of character in .available-characters
-  $('.available-characters .character').on('click', function() {
+  $('.available-characters').on('click', '.character', function() {
     // remove hidden class for .your-character and .enemy-characters
     $('.your-character').removeClass('hidden');
     $('.enemy-characters').removeClass('hidden');
     // set yourCharacterHealth to the value of the character chosen
-    yourCharacterHealth = $(this).attr('value');
-    console.log("YOUR CHARACTER HEALTH: " + yourCharacterHealth);
+    yourCharacterHealth = $(this).attr('data-hp');
+      // set yourCharacterAttack to the value of the character chosen
+    yourCharacterAttack = setYourCharacterAttack(this);
+    // set yourCharacter
+    yourCharacter = $(this);
     // move character to .your-character
     $('.your-character').append($(this));
     // move rest of characters to .enemy-characters
@@ -44,30 +29,125 @@ $(document).ready(function() {
     $('.available-characters').children().appendTo('.enemy-characters');
     $(this).removeClass('col-sm-3 col-xs-6');
     $(this).addClass('col-sm-6 col-xs-12');
+  });
 
-    // listen for click of character in .enemy-characters
-    $('.enemy-characters .character').on('click', function() {
+  // listen for click of character in .enemy-characters
+  $('.enemy-characters').on('click', '.character', function() {
+    if ($('.defender').hasClass('hidden')) {
       // remove hidden class for .defender
       $('.defender').removeClass('hidden');
       // set defenderHealth to the value of the character chosen
-      defenderHealth = $(this).attr('value');
+      defenderHealth = $(this).attr('data-hp');
       // set defenderAttack to the value of the character chosen
-      if ($(this).hasClass('vader')) {
-        defenderAttack =  25;
-      } else if ($(this).hasClass('skywalker')) {
-        defenderAttack =  20;
-      } else if ($(this).hasClass('kenobi')) {
-        defenderAttack =  10;
-      } else if ($(this).hasClass('palpatine')) {
-        defenderAttack =  15;
-      }
+      defenderAttack = setDefenderAttack(this);
+      // set defender
+      defender = $(this);
       // move character to .defender
       $('.defender').append($(this));
       $(this).removeClass('col-sm-3 col-xs-6');
       $(this).addClass('col-sm-6 col-xs-12');
-      console.log("DEFENDER ATTACK: " + defenderAttack);
-      console.log("DEFENDER HEALTH: " + defenderHealth);
-      console.log("YOUR CHARACTER HEALTH: " + yourCharacterHealth);
-    });
+    }
   });
+
+  // listen for click of .attack
+  $('.attack').on('click', function() {
+    // reduce yourCharacterHealth by defenderAttack amount
+    yourCharacterHealth = yourCharacterHealth - defenderAttack;
+    // increase yourCharacterExperience
+    yourCharacterExperience++;
+    // increase yourCharacterAttack based on yourCharacterExperience
+    updatedAttack = yourCharacterExperience * yourCharacterAttack;
+    // reduce defenderHealth by updatedAttack
+    defenderHealth = defenderHealth - updatedAttack;
+    // update health stats on charactersa
+    yourCharacter.children().children().children('p').html(yourCharacterHealth);
+    defender.children().children().children('p').html(defenderHealth);
+
+    checkForDefenderDeath();
+    checkResult();
+  });
+
+  function setYourCharacterAttack(yourCharacterElement) {
+    if ($(yourCharacterElement).hasClass('vader')) {
+       return 10;
+    } else if ($(yourCharacterElement).hasClass('skywalker')) {
+       return 9;
+    } else if ($(yourCharacterElement).hasClass('kenobi')) {
+       return 8;
+    } else if ($(yourCharacterElement).hasClass('palpatine')) {
+       return 7;
+    }
+  }
+
+  function setDefenderAttack(defenderElement) {
+    if ($(defenderElement).hasClass('vader')) {
+       return 25;
+    } else if ($(defenderElement).hasClass('skywalker')) {
+       return 20;
+    } else if ($(defenderElement).hasClass('kenobi')) {
+       return 10;
+    } else if ($(defenderElement).hasClass('palpatine')) {
+       return 15;
+    }
+  }
+
+  function checkForDefenderDeath() {
+    // if defenderHealth reaches 0
+    if (defenderHealth <= 0) {
+      console.log('Here I am');
+      // remove defender from game
+      $('.defender > .character').remove();
+      // allow for new defender to be selected
+      $('.defender').addClass('hidden');
+    }
+  }
+
+  function checkResult() {
+    if ($('.defender').children('.character').length <= 0 &&
+        $('.enemy-characters').children('.character').length <= 0) {
+      alert('You win!');
+      reset();
+    }
+    // if yourCharacterHealth reaches 0
+    else if (yourCharacterHealth <= 0) {
+      // you lose
+      alert("You lose!!");
+      reset();
+    }
+  }
+
+  function reset() {
+    // move all characters back to .available-characters
+    $('.your-character > .character').remove();
+    $('.defender > .character').remove();
+    $('.enemy-characters > .character').remove();
+    $('.your-character').addClass('hidden');
+    $('.defender').addClass('hidden');
+    $('.enemy-characters').addClass('hidden');
+    $('.available-characters').html(
+      '<h2 class="directions">choose a character...</h2><div class="col-xs-6 ' +
+      'col-sm-3 character vader" data-hp=120><div class="thumbnail"><img src=' +
+      '"assets/images/darth_vader.jpg" alt="darth vader icon"><div class="cap' +
+      'tion"><h5 class="text-info">Darth Vader</h5><p>120</p></div></div></di' +
+      'v><div class="col-xs-6 col-sm-3 character skywalker" data-hp=100><div ' +
+      'class="thumbnail"><img src="assets/images/luke_skywalker.jpg" alt="luk' +
+      'e skywalker icon"><div class="caption"><h5 class="text-info">Luke Skyw' +
+      'alker</h5><p>100</p></div></div></div><div class="col-xs-6 col-sm-3 ch' +
+      'aracter kenobi" data-hp=90><div class="thumbnail"><img src="assets/ima' +
+      'ges/obi_wan.jpg" alt="obi wan icon"><div class="caption"><h5 class="te' +
+      'xt-info">Obi-wan Kenobi</h5><p>90</p></div></div></div><div class="col' +
+      '-xs-6 col-sm-3 character palpatine" data-hp=105><div class="thumbnail"' +
+      '><img src="assets/images/emperor_palpatine.jpg" alt="emperor palpatine' +
+      ' icon"><div class="caption"><h5 class="text-info">Emperor Palpatine</h' +
+      '5><p>105</p></div></div></div>'
+    );
+    // reset all variables
+    yourCharacter = '';
+    defender = '';
+    yourCharacterHealth = 0;
+    yourCharacterExperience = 0;
+    yourCharacterAttack = 0;
+    defenderHealth = 0;
+    defenderAttack = 0;
+  }
 });
