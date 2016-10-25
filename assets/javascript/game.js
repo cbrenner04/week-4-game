@@ -69,13 +69,13 @@ $(document).ready(function() {
 
   function setYourCharacterAttack(yourCharacterElement) {
     if ($(yourCharacterElement).hasClass('vader')) {
-       return 10;
+       return 15;
     } else if ($(yourCharacterElement).hasClass('skywalker')) {
-       return 9;
+       return 13;
     } else if ($(yourCharacterElement).hasClass('kenobi')) {
-       return 8;
+       return 12;
     } else if ($(yourCharacterElement).hasClass('palpatine')) {
-       return 7;
+       return 14;
     }
   }
 
@@ -83,11 +83,11 @@ $(document).ready(function() {
     if ($(defenderElement).hasClass('vader')) {
        return 25;
     } else if ($(defenderElement).hasClass('skywalker')) {
-       return 20;
+       return 15;
     } else if ($(defenderElement).hasClass('kenobi')) {
        return 10;
     } else if ($(defenderElement).hasClass('palpatine')) {
-       return 15;
+       return 20;
     }
   }
 
@@ -129,17 +129,17 @@ $(document).ready(function() {
       'col-sm-3 character vader" data-hp=120><div class="thumbnail"><img src=' +
       '"assets/images/darth_vader.jpg" alt="darth vader icon"><div class="cap' +
       'tion"><h5 class="text-info">Darth Vader</h5><p>120</p></div></div></di' +
-      'v><div class="col-xs-6 col-sm-3 character skywalker" data-hp=100><div ' +
+      'v><div class="col-xs-6 col-sm-3 character skywalker" data-hp=110><div ' +
       'class="thumbnail"><img src="assets/images/luke_skywalker.jpg" alt="luk' +
       'e skywalker icon"><div class="caption"><h5 class="text-info">Luke Skyw' +
-      'alker</h5><p>100</p></div></div></div><div class="col-xs-6 col-sm-3 ch' +
-      'aracter kenobi" data-hp=90><div class="thumbnail"><img src="assets/ima' +
-      'ges/obi_wan.jpg" alt="obi wan icon"><div class="caption"><h5 class="te' +
-      'xt-info">Obi-wan Kenobi</h5><p>90</p></div></div></div><div class="col' +
-      '-xs-6 col-sm-3 character palpatine" data-hp=105><div class="thumbnail"' +
-      '><img src="assets/images/emperor_palpatine.jpg" alt="emperor palpatine' +
-      ' icon"><div class="caption"><h5 class="text-info">Emperor Palpatine</h' +
-      '5><p>105</p></div></div></div>'
+      'alker</h5><p>110</p></div></div></div><div class="col-xs-6 col-sm-3 ch' +
+      'aracter kenobi" data-hp=105><div class="thumbnail"><img src="assets/im' +
+      'ages/obi_wan.jpg" alt="obi wan icon"><div class="caption"><h5 class="t' +
+      'ext-info">Obi-wan Kenobi</h5><p>105</p></div></div></div><div class="c' +
+      'ol-xs-6 col-sm-3 character palpatine" data-hp=115><div class="thumbnai' +
+      'l"><img src="assets/images/emperor_palpatine.jpg" alt="emperor palpati' +
+      'ne icon"><div class="caption"><h5 class="text-info">Emperor Palpatine<' +
+      '/h5><p>115</p></div></div></div>'
     );
     // reset all variables
     yourCharacter = '';
