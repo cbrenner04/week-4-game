@@ -69,25 +69,25 @@ $(document).ready(function() {
 
   function setYourCharacterAttack(yourCharacterElement) {
     if ($(yourCharacterElement).hasClass('vader')) {
-       return 15;
+       return 80;
     } else if ($(yourCharacterElement).hasClass('skywalker')) {
-       return 13;
+       return 40;
     } else if ($(yourCharacterElement).hasClass('kenobi')) {
-       return 12;
+       return 20;
     } else if ($(yourCharacterElement).hasClass('palpatine')) {
-       return 14;
+       return 60;
     }
   }
 
   function setDefenderAttack(defenderElement) {
     if ($(defenderElement).hasClass('vader')) {
-       return 25;
+       return 40;
     } else if ($(defenderElement).hasClass('skywalker')) {
-       return 15;
+       return 20;
     } else if ($(defenderElement).hasClass('kenobi')) {
        return 10;
     } else if ($(defenderElement).hasClass('palpatine')) {
-       return 20;
+       return 30;
     }
   }
 
@@ -103,17 +103,17 @@ $(document).ready(function() {
   }
 
   function checkResult() {
+    // if yourCharacterHealth reaches 0
+    if (yourCharacterHealth <= 0) {
+      // you lose
+      alert("You lose!!");
+      reset();
+    }
     // if no more defenders in defender div or enemy-characters div
-    if ($('.defender').children('.character').length <= 0 &&
+    else if ($('.defender').children('.character').length <= 0 &&
         $('.enemy-characters').children('.character').length <= 0) {
       // you win
       alert('You win!');
-      reset();
-    }
-    // if yourCharacterHealth reaches 0
-    else if (yourCharacterHealth <= 0) {
-      // you lose
-      alert("You lose!!");
       reset();
     }
   }
@@ -128,20 +128,20 @@ $(document).ready(function() {
     $('.enemy-characters').addClass('hidden');
     $('.available-characters').html(
       '<h2 class="directions">choose a character...</h2><div class="col-xs-6 ' +
-      'col-sm-3 character vader" data-hp=120><div class="thumbnail"><img src=' +
+      'col-sm-3 character vader" data-hp=80><div class="thumbnail"><img src=' +
       '"assets/images/darth_vader.jpg" alt="darth vader icon"><div class="cap' +
-      'tion"><h5 class="text-info">Darth Vader</h5><p>120</p></div></div></di' +
-      'v><div class="col-xs-6 col-sm-3 character skywalker" data-hp=110><div ' +
+      'tion"><h5 class="text-info">Darth Vader</h5><p>80</p></div></div></di' +
+      'v><div class="col-xs-6 col-sm-3 character skywalker" data-hp=125><div ' +
       'class="thumbnail"><img src="assets/images/luke_skywalker.jpg" alt="luk' +
       'e skywalker icon"><div class="caption"><h5 class="text-info">Luke Skyw' +
-      'alker</h5><p>110</p></div></div></div><div class="col-xs-6 col-sm-3 ch' +
-      'aracter kenobi" data-hp=105><div class="thumbnail"><img src="assets/im' +
+      'alker</h5><p>125</p></div></div></div><div class="col-xs-6 col-sm-3 ch' +
+      'aracter kenobi" data-hp=200><div class="thumbnail"><img src="assets/im' +
       'ages/obi_wan.jpg" alt="obi wan icon"><div class="caption"><h5 class="t' +
-      'ext-info">Obi-wan Kenobi</h5><p>105</p></div></div></div><div class="c' +
-      'ol-xs-6 col-sm-3 character palpatine" data-hp=115><div class="thumbnai' +
+      'ext-info">Obi-wan Kenobi</h5><p>200</p></div></div></div><div class="c' +
+      'ol-xs-6 col-sm-3 character palpatine" data-hp=100><div class="thumbnai' +
       'l"><img src="assets/images/emperor_palpatine.jpg" alt="emperor palpati' +
       'ne icon"><div class="caption"><h5 class="text-info">Emperor Palpatine<' +
-      '/h5><p>115</p></div></div></div>'
+      '/h5><p>100</p></div></div></div>'
     );
     // reset all variables
     yourCharacter = '';
