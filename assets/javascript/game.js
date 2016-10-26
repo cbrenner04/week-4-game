@@ -53,7 +53,17 @@ $(document).ready(function() {
   function resetDom() {
     // render game board
     // strings are left fragmented so I can easily update
-    $("#game").html(
+    $("body").html(
+      '<div class="container-fluid">' +
+
+      '<div class="row">' +
+
+      '<div class="col-md-4 col-md-push-8">' +
+      '<h1>Star Wars RPG</h1>' +
+      '</div>' +
+
+      '<div class="col-md-8 col-md-pull-4">' +
+
       '<div class="row available-characters">' +
       '<h2 class="directions">choose a character...</h2>' +
 
@@ -103,6 +113,12 @@ $(document).ready(function() {
 
       '<div class="row enemy-characters hidden">' +
       '<h2 class="heading">Enemies Available to Attack</h2>' +
+
+      '</div>' +
+
+      '</div>' +
+
+      '</div>' +
 
       '</div>'
     );
