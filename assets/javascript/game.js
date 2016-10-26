@@ -103,8 +103,10 @@ $(document).ready(function() {
   }
 
   function checkResult() {
+    // if no more defenders in defender div or enemy-characters div
     if ($('.defender').children('.character').length <= 0 &&
         $('.enemy-characters').children('.character').length <= 0) {
+      // you win
       alert('You win!');
       reset();
     }
