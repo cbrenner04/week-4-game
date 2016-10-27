@@ -50,78 +50,140 @@ $(document).ready(function() {
   resetDom();
   playGame();
 
+  // render game board
   function resetDom() {
-    // render game board
-    // strings are left fragmented so I can easily update
-    $("body").html(
-      '<div class="container-fluid">' +
+    // reset DOM to have nothing in it
+    $('body').html('');
 
-      '<div class="row">' +
+    // add container for everything to live
+    var containerFluid = $('<div>');
+    containerFluid.addClass('container-fluid');
+    // the containerFluid lives inside the body
+    $('body').append(containerFluid);
 
-      '<div class="col-md-4 col-md-push-8">' +
-      '<h1>Star Wars RPG</h1>' +
+    // add row inside containerFluid so we have columns
+    var row = $('<div>');
+    row.addClass('row');
+    // the row lives inside containerFluid
+    containerFluid.html(row);
+
+    // add title to the top of the row
+    // first add a column for the title to live in
+    var gameTitleColumn = $('<div>');
+    // this column pushes right in md+ screens
+    gameTitleColumn.addClass('col-md-4 col-md-push-8');
+    // add title
+    var gameTitle = $('<h1>');
+    gameTitle.text('Star Wars RPG');
+    // gameTitle lives inside gameTitleColumn
+    gameTitleColumn.html(gameTitle);
+    // append gameTitleColumn to top of row
+    row.append(gameTitleColumn);
+
+    // add column for game board to live in
+    // this is the title's partner
+    var gameColumn = $('<div>');
+    // this column pulls left in md+ screens
+    gameColumn.addClass('col-md-8 col-md-pull-4');
+    // append this column to the row
+    row.append(gameColumn);
+
+    // add rows for three game board areas
+
+    // add row for available characters
+    var availableCharactersRow = $('<div>');
+    availableCharactersRow.addClass('row available-characters');
+    // add availableCharactersRow to gameColumn
+    gameColumn.append(availableCharactersRow);
+
+    // add row for chosen characters, both your character and the defender
+    var chosenCharactersRow = $('<div>');
+    chosenCharactersRow.addClass('row');
+    // add chosenCharactersRow to gameColumn
+    gameColumn.append(chosenCharactersRow);
+
+    // add row for enemy characters
+    var enemyCharactersRow = $('<div>');
+    enemyCharactersRow.addClass('row enemy-characters hidden');
+    // add enemyCharactersRow to gameColumn
+    gameColumn.append(enemyCharactersRow);
+
+    // populate available characters row
+
+    // add directions to available characters row
+    var availableCharactersDirections = $('<h3>');
+    availableCharactersDirections.addClass('directions');
+    availableCharactersDirections.text('choose a character...');
+    // append the directions to the availableCharactersRow
+    availableCharactersRow.append(availableCharactersDirections);
+
+    // append available characters to availableCharactersRow
+    availableCharactersRow.append(
+      '<div class="col-xs-6 col-sm-3 character vader" data-hp=' + darthVader.health + '>' +
+        '<div class="thumbnail">' +
+          '<img src=' + darthVader.image + ' alt="' + darthVader.name + ' icon">' +
+          '<div class="caption">' +
+            '<h5 class="text-info">' + darthVader.name + '</h5>' +
+            '<p>' + darthVader.health + '</p>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
 
-      '<div class="col-md-8 col-md-pull-4">' +
-
-      '<div class="row available-characters">' +
-      '<h2 class="directions">choose a character...</h2>' +
-
-      '<div class="col-xs-6 col-sm-3 character vader" data-hp=' +
-      darthVader.health + '>' + '<div class="thumbnail">' + '<img src=' +
-      darthVader.image + ' alt="' + darthVader.name + ' icon">' +
-      '<div class="caption">' + '<h5 class="text-info">' + darthVader.name +
-      '</h5>' + '<p>' + darthVader.health + '</p>' + '</div>' + '</div>' +
+      '<div class="col-xs-6 col-sm-3 character skywalker" data-hp=' + lukeSkywalker.health + '>' +
+        '<div class="thumbnail">' +
+          '<img src=' + lukeSkywalker.image +' alt="' + lukeSkywalker.name + ' icon">' +
+          '<div class="caption">' +
+            '<h5 class="text-info">' + lukeSkywalker.name + '</h5>' +
+            '<p>' + lukeSkywalker.health + '</p>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
 
-      '<div class="col-xs-6 col-sm-3 character skywalker" data-hp=' +
-      lukeSkywalker.health + '>' + '<div class="thumbnail">' + '<img src=' +
-      lukeSkywalker.image +' alt="' + lukeSkywalker.name + ' icon">' +
-      '<div class="caption">' + '<h5 class="text-info">' + lukeSkywalker.name +
-      '</h5>' + '<p>' + lukeSkywalker.health + '</p>' + '</div>' + '</div>' +
+      '<div class="col-xs-6 col-sm-3 character kenobi" data-hp=' + obiWanKenobi.health + '>' +
+        '<div class="thumbnail">' +
+          '<img src=' + obiWanKenobi.image + ' alt="' + obiWanKenobi.name + ' icon">' +
+          '<div class="caption">' +
+            '<h5 class="text-info">' + obiWanKenobi.name + '</h5>' +
+            '<p>' + obiWanKenobi.health + '</p>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
 
-      '<div class="col-xs-6 col-sm-3 character kenobi" data-hp=' +
-      obiWanKenobi.health + '>' + '<div class="thumbnail">' + '<img src=' +
-      obiWanKenobi.image + ' alt="' + obiWanKenobi.name + ' icon">' +
-      '<div class="caption">' + '<h5 class="text-info">' + obiWanKenobi.name +
-      '</h5>' + '<p>' + obiWanKenobi.health + '</p>' + '</div>' + '</div>' +
-      '</div>' +
-
-      '<div class="col-xs-6 col-sm-3 character palpatine" data-hp=' +
-      emperorPalpatine.health + '>' + '<div class="thumbnail">' + '<img src=' +
-      emperorPalpatine.image + ' alt="' + emperorPalpatine.name + ' icon">' +
-      '<div class="caption">' + '<h5 class="text-info">' +
-      emperorPalpatine.name + '</h5>' + '<p>' + emperorPalpatine.health +
-      '</p>' + '</div>' + '</div>' + '</div>' +
-
-      '</div>' +
-
-      '<div class="row">' +
-
-      '<div class="col-xs-6">' +
-      '<div class="your-character hidden">' + '<h2>Your Character</h2>' +
-      '</div>' + '</div>' +
-
-      '<div class="col-xs-6">' + '<div class="defender hidden">' +
-      '<h2>Defender</h2>' +
-      '<button class="btn btn-default attack pull-left">Attack</button>' +
-      '<br class="visible-xs">' + '<br class="visible-xs">' +
-      '<br class="visible-xs">' + '</div>' + '</div>' +
-
-      '</div>' +
-
-      '<div class="row enemy-characters hidden">' +
-      '<h2 class="heading">Enemies Available to Attack</h2>' +
-
-      '</div>' +
-
-      '</div>' +
-
-      '</div>' +
-
+      '<div class="col-xs-6 col-sm-3 character palpatine" data-hp=' + emperorPalpatine.health + '>' +
+        '<div class="thumbnail">' +
+          '<img src=' + emperorPalpatine.image + ' alt="' + emperorPalpatine.name + ' icon">' +
+          '<div class="caption">' +
+            '<h5 class="text-info">' + emperorPalpatine.name + '</h5>' +
+            '<p>' + emperorPalpatine.health + '</p>' +
+          '</div>' +
+        '</div>' +
       '</div>'
     );
+
+    chosenCharactersRow.html(
+      '<div class="col-xs-6">' +
+        '<div class="your-character hidden">' +
+          '<h3>Your Character</h3>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="col-xs-6">' +
+        '<div class="defender hidden">' +
+          '<h3>Defender</h3>' +
+          '<button class="btn btn-default attack pull-left">Attack</button>' +
+          '<br class="visible-xs">' +
+          '<br class="visible-xs">' +
+          '<br class="visible-xs">' +
+        '</div>' +
+      '</div>'
+    );
+
+    // add heading for enemyCharactersRow
+    var enemyCharactersHeading = $('<h3>');
+    enemyCharactersHeading.addClass('heading');
+    enemyCharactersHeading.text('Enemies Available to Attack');
+
+    enemyCharactersRow.html(enemyCharactersHeading);
   }
 
   function playGame() {
