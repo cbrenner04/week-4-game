@@ -118,64 +118,152 @@ $(document).ready(function() {
     availableCharactersRow.append(availableCharactersDirections);
 
     // append available characters to availableCharactersRow
-    availableCharactersRow.append(
-      '<div class="col-xs-6 col-sm-3 character vader" data-hp=' + darthVader.health + '>' +
-        '<div class="thumbnail">' +
-          '<img src=' + darthVader.image + ' alt="' + darthVader.name + ' icon">' +
-          '<div class="caption">' +
-            '<h5 class="text-info">' + darthVader.name + '</h5>' +
-            '<p>' + darthVader.health + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-
-      '<div class="col-xs-6 col-sm-3 character skywalker" data-hp=' + lukeSkywalker.health + '>' +
-        '<div class="thumbnail">' +
-          '<img src=' + lukeSkywalker.image +' alt="' + lukeSkywalker.name + ' icon">' +
-          '<div class="caption">' +
-            '<h5 class="text-info">' + lukeSkywalker.name + '</h5>' +
-            '<p>' + lukeSkywalker.health + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-
-      '<div class="col-xs-6 col-sm-3 character kenobi" data-hp=' + obiWanKenobi.health + '>' +
-        '<div class="thumbnail">' +
-          '<img src=' + obiWanKenobi.image + ' alt="' + obiWanKenobi.name + ' icon">' +
-          '<div class="caption">' +
-            '<h5 class="text-info">' + obiWanKenobi.name + '</h5>' +
-            '<p>' + obiWanKenobi.health + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-
-      '<div class="col-xs-6 col-sm-3 character palpatine" data-hp=' + emperorPalpatine.health + '>' +
-        '<div class="thumbnail">' +
-          '<img src=' + emperorPalpatine.image + ' alt="' + emperorPalpatine.name + ' icon">' +
-          '<div class="caption">' +
-            '<h5 class="text-info">' + emperorPalpatine.name + '</h5>' +
-            '<p>' + emperorPalpatine.health + '</p>' +
-          '</div>' +
-        '</div>' +
-      '</div>'
+    // start with darth
+    var darthColumn = $('<div>');
+    darthColumn.addClass('col-xs-6 col-sm-3 character vader');
+    darthColumn.attr('data-hp', darthVader.health);
+    availableCharactersRow.append(darthColumn);
+    // add thumbnail
+    var darthThumbnail = $('<div>');
+    darthThumbnail.addClass('thumbnail');
+    darthColumn.append(darthThumbnail);
+    // append image
+    darthThumbnail.append(
+      '<img src=' + darthVader.image + ' alt="' + darthVader.name + ' icon">'
     );
+    // append caption
+    var darthCaption = $('<div>');
+    darthCaption.addClass('caption');
+    darthThumbnail.append(darthCaption);
+    // add caption heading
+    var darthCaptionHeading = $('<h5>');
+    darthCaptionHeading.addClass('text-info');
+    darthCaptionHeading.text(darthVader.name);
+    darthCaption.append(darthCaptionHeading);
+    // add caption text
+    var darthCaptionText = $('<p>');
+    darthCaptionText.text(darthVader.health);
+    darthCaption.append(darthCaptionText);
 
-    chosenCharactersRow.html(
-      '<div class="col-xs-6">' +
-        '<div class="your-character hidden">' +
-          '<h3>Your Character</h3>' +
-        '</div>' +
-      '</div>' +
+    // now luke
+    var lukeColumn = $('<div>');
+    lukeColumn.addClass('col-xs-6 col-sm-3 character skywalker');
+    lukeColumn.attr('data-hp', lukeSkywalker.health);
+    availableCharactersRow.append(lukeColumn);
+    // add thumbnail
+    var lukeThumbnail = $('<div>');
+    lukeThumbnail.addClass('thumbnail');
+    lukeColumn.append(lukeThumbnail);
+    // append image
+    lukeThumbnail.append(
+      '<img src=' + lukeSkywalker.image + ' alt="' +
+      lukeSkywalker.name + ' icon">'
+    );
+    // append caption
+    var lukeCaption = $('<div>');
+    lukeCaption.addClass('caption');
+    lukeThumbnail.append(lukeCaption);
+    // add caption heading
+    var lukeCaptionHeading = $('<h5>');
+    lukeCaptionHeading.addClass('text-info');
+    lukeCaptionHeading.text(lukeSkywalker.name);
+    lukeCaption.append(lukeCaptionHeading);
+    // add caption text
+    var lukeCaptionText = $('<p>');
+    lukeCaptionText.text(lukeSkywalker.health);
+    lukeCaption.append(lukeCaptionText);
 
-      '<div class="col-xs-6">' +
-        '<div class="defender hidden">' +
-          '<h3>Defender</h3>' +
-          '<button class="btn btn-default attack pull-left">Attack</button>' +
-          '<br class="visible-xs">' +
-          '<br class="visible-xs">' +
-          '<br class="visible-xs">' +
-        '</div>' +
-      '</div>'
+    // on to obi-wan
+    var obiWanColumn = $('<div>');
+    obiWanColumn.addClass('col-xs-6 col-sm-3 character skywalker');
+    obiWanColumn.attr('data-hp', obiWanKenobi.health);
+    availableCharactersRow.append(obiWanColumn);
+    // add thumbnail
+    var obiWanThumbnail = $('<div>');
+    obiWanThumbnail.addClass('thumbnail');
+    obiWanColumn.append(obiWanThumbnail);
+    // append image
+    obiWanThumbnail.append(
+      '<img src=' + obiWanKenobi.image + ' alt="' +
+      obiWanKenobi.name + ' icon">'
+    );
+    // append caption
+    var obiWanCaption = $('<div>');
+    obiWanCaption.addClass('caption');
+    obiWanThumbnail.append(obiWanCaption);
+    // add caption heading
+    var obiWanCaptionHeading = $('<h5>');
+    obiWanCaptionHeading.addClass('text-info');
+    obiWanCaptionHeading.text(obiWanKenobi.name);
+    obiWanCaption.append(obiWanCaptionHeading);
+    // add caption text
+    var obiWanCaptionText = $('<p>');
+    obiWanCaptionText.text(obiWanKenobi.health);
+    obiWanCaption.append(obiWanCaptionText);
+
+    // finally the emperor
+    var emperorColumn = $('<div>');
+    emperorColumn.addClass('col-xs-6 col-sm-3 character skywalker');
+    emperorColumn.attr('data-hp', emperorPalpatine.health);
+    availableCharactersRow.append(emperorColumn);
+    // add thumbnail
+    var emperorThumbnail = $('<div>');
+    emperorThumbnail.addClass('thumbnail');
+    emperorColumn.append(emperorThumbnail);
+    // append image
+    emperorThumbnail.append(
+      '<img src=' + emperorPalpatine.image + ' alt="' +
+      emperorPalpatine.name + ' icon">'
+    );
+    // append caption
+    var emperorCaption = $('<div>');
+    emperorCaption.addClass('caption');
+    emperorThumbnail.append(emperorCaption);
+    // add caption heading
+    var emperorCaptionHeading = $('<h5>');
+    emperorCaptionHeading.addClass('text-info');
+    emperorCaptionHeading.text(emperorPalpatine.name);
+    emperorCaption.append(emperorCaptionHeading);
+    // add caption text
+    var emperorCaptionText = $('<p>');
+    emperorCaptionText.text(emperorPalpatine.health);
+    emperorCaption.append(emperorCaptionText);
+
+    // add columns to chosenCharactersRow
+    // first column for your character
+    var yourCharacterColumn = $('<div>');
+    yourCharacterColumn.addClass('col-xs-6 your-character hidden');
+    // heading
+    var yourCharacterColumnHeading = $('<h3>');
+    yourCharacterColumnHeading.text('Your Character');
+    // put the heading inside the div
+    yourCharacterColumn.html(yourCharacterColumnHeading);
+    // append yourCharacterColumn to choseCharactesRow
+    chosenCharactersRow.append(yourCharacterColumn);
+
+    // second column for the defender
+    var defenderColumn = $('<div>');
+    defenderColumn.addClass('col-xs-6 defender hidden');
+    // heading
+    var defenderColumnHeading = $('<h3>');
+    defenderColumnHeading.text('Defender');
+    // put the heading inside the div
+    defenderColumn.append(defenderColumnHeading);
+    // append the defender column to the chosenCharactersRow
+    chosenCharactersRow.append(defenderColumn);
+
+    // add attack button to defenderColumn
+    var attackButton = $('<button>');
+    attackButton.addClass('btn btn-default attack pull-left');
+    attackButton.text('Attack');
+    // append attackButton to defenderColumn
+    defenderColumn.append(attackButton);
+    // add some breaks so things look appealing
+    // these only matter for xs views
+    defenderColumn.append(
+      '<br class="visible-xs">' +
+      '<br class="visible-xs">' +
+      '<br class="visible-xs">'
     );
 
     // add heading for enemyCharactersRow
