@@ -1,20 +1,69 @@
 // render game board
 function resetDom() {
+  makeBodyBlank();
+  // set up page
+  containerFluid = addContainerToBody();
+  row = addOuterRow();
+  // need a title
+  addGameTitle(row);
+  // the column for game play
+  gameColumn = addGameColumn(row);
+
+  // add rows for three game board areas
+  availableCharactersRow = addAvailableCharactersRow(gameColumn);
+  chosenCharactersRow = addChosenCharactersRow(gameColumn);
+  enemyCharactersRow = addEnemyCharactersRow(gameColumn);
+
+  // populate available characters row
+  // need some directions
+  addDirectionsForAvailableCharacters(availableCharactersRow);
+
+  // append available characters to availableCharactersRow
+  // add darth thumbnail
+  addDarthVader(availableCharactersRow);
+  // now luke
+  addLukeSkywalker(availableCharactersRow);
+  // on to obi-wan
+  addObiWanKenobi(availableCharactersRow);
+  // finally the emperor
+  addEmperorPalpatine(availableCharactersRow);
+
+  // add columns to chosenCharactersRow
+  // first column for your character
+  addYourCharactersColumn(chosenCharactersRow);
+  // second column for the defender
+  defenderColumn = addDefenderColumn(chosenCharactersRow);
+  // add attack button to defenderColumn
+  addAttackButton(defenderColumn);
+
+  // add heading for enemyCharactersRow
+  addEnemyCharactersHeading(enemyCharactersRow);
+}
+
+function makeBodyBlank() {
   // reset DOM to have nothing in it
   $('body').html('');
+}
 
+function addContainerToBody() {
   // add container for everything to live
   var containerFluid = $('<div>');
   containerFluid.addClass('container-fluid');
   // the containerFluid lives inside the body
   $('body').append(containerFluid);
+  return containerFluid;
+}
 
+function addOuterRow() {
   // add row inside containerFluid so we have columns
   var row = $('<div>');
   row.addClass('row');
   // the row lives inside containerFluid
   containerFluid.html(row);
+  return row;
+}
 
+function addGameTitle(row) {
   // add title to the top of the row
   // first add a column for the title to live in
   var gameTitleColumn = $('<div>');
@@ -27,7 +76,9 @@ function resetDom() {
   gameTitleColumn.html(gameTitle);
   // append gameTitleColumn to top of row
   row.append(gameTitleColumn);
+}
 
+function addGameColumn(row) {
   // add column for game board to live in
   // this is the title's partner
   var gameColumn = $('<div>');
@@ -35,37 +86,46 @@ function resetDom() {
   gameColumn.addClass('col-md-8 col-md-pull-4');
   // append this column to the row
   row.append(gameColumn);
+  return gameColumn;
+}
 
-  // add rows for three game board areas
-
+function addAvailableCharactersRow(gameColumn) {
   // add row for available characters
   var availableCharactersRow = $('<div>');
   availableCharactersRow.addClass('row available-characters');
   // add availableCharactersRow to gameColumn
   gameColumn.append(availableCharactersRow);
+  return availableCharactersRow;
+}
 
+function addChosenCharactersRow(gameColumn) {
   // add row for chosen characters, both your character and the defender
   var chosenCharactersRow = $('<div>');
   chosenCharactersRow.addClass('row');
   // add chosenCharactersRow to gameColumn
   gameColumn.append(chosenCharactersRow);
+  return chosenCharactersRow;
+}
 
+function addEnemyCharactersRow(gameColumn) {
   // add row for enemy characters
   var enemyCharactersRow = $('<div>');
   enemyCharactersRow.addClass('row enemy-characters hidden');
   // add enemyCharactersRow to gameColumn
   gameColumn.append(enemyCharactersRow);
+  return enemyCharactersRow;
+}
 
-  // populate available characters row
-
+function addDirectionsForAvailableCharacters(availableCharactersRow) {
   // add directions to available characters row
   var availableCharactersDirections = $('<h3>');
   availableCharactersDirections.addClass('directions');
   availableCharactersDirections.text('choose a character...');
   // append the directions to the availableCharactersRow
   availableCharactersRow.append(availableCharactersDirections);
+}
 
-  // append available characters to availableCharactersRow
+function addDarthVader(availableCharactersRow) {
   // start with darth
   var darthColumn = $('<div>');
   darthColumn.addClass('col-xs-6 col-sm-3 character vader');
@@ -92,8 +152,9 @@ function resetDom() {
   var darthCaptionText = $('<p>');
   darthCaptionText.text(darthVader.health);
   darthCaption.append(darthCaptionText);
+}
 
-  // now luke
+function addLukeSkywalker(availableCharactersRow) {
   var lukeColumn = $('<div>');
   lukeColumn.addClass('col-xs-6 col-sm-3 character skywalker');
   lukeColumn.attr('data-hp', lukeSkywalker.health);
@@ -120,8 +181,9 @@ function resetDom() {
   var lukeCaptionText = $('<p>');
   lukeCaptionText.text(lukeSkywalker.health);
   lukeCaption.append(lukeCaptionText);
+}
 
-  // on to obi-wan
+function addObiWanKenobi(availableCharactersRow) {
   var obiWanColumn = $('<div>');
   obiWanColumn.addClass('col-xs-6 col-sm-3 character skywalker');
   obiWanColumn.attr('data-hp', obiWanKenobi.health);
@@ -148,8 +210,9 @@ function resetDom() {
   var obiWanCaptionText = $('<p>');
   obiWanCaptionText.text(obiWanKenobi.health);
   obiWanCaption.append(obiWanCaptionText);
+}
 
-  // finally the emperor
+function addEmperorPalpatine(availableCharactersRow) {
   var emperorColumn = $('<div>');
   emperorColumn.addClass('col-xs-6 col-sm-3 character skywalker');
   emperorColumn.attr('data-hp', emperorPalpatine.health);
@@ -176,9 +239,9 @@ function resetDom() {
   var emperorCaptionText = $('<p>');
   emperorCaptionText.text(emperorPalpatine.health);
   emperorCaption.append(emperorCaptionText);
+}
 
-  // add columns to chosenCharactersRow
-  // first column for your character
+function addYourCharactersColumn(chosenCharactersRow) {
   var yourCharacterColumn = $('<div>');
   yourCharacterColumn.addClass('col-xs-6 your-character hidden');
   // heading
@@ -188,8 +251,9 @@ function resetDom() {
   yourCharacterColumn.html(yourCharacterColumnHeading);
   // append yourCharacterColumn to choseCharactesRow
   chosenCharactersRow.append(yourCharacterColumn);
+}
 
-  // second column for the defender
+function addDefenderColumn(chosenCharactersRow) {
   var defenderColumn = $('<div>');
   defenderColumn.addClass('col-xs-6 defender hidden');
   // heading
@@ -199,8 +263,10 @@ function resetDom() {
   defenderColumn.append(defenderColumnHeading);
   // append the defender column to the chosenCharactersRow
   chosenCharactersRow.append(defenderColumn);
+  return defenderColumn;
+}
 
-  // add attack button to defenderColumn
+function addAttackButton(defenderColumn) {
   var attackButton = $('<button>');
   attackButton.addClass('btn btn-default attack pull-left');
   attackButton.text('Attack');
@@ -213,8 +279,9 @@ function resetDom() {
     '<br class="visible-xs">' +
     '<br class="visible-xs">'
   );
+}
 
-  // add heading for enemyCharactersRow
+function addEnemyCharactersHeading(enemyCharactersRow) {
   var enemyCharactersHeading = $('<h3>');
   enemyCharactersHeading.addClass('heading');
   enemyCharactersHeading.text('Enemies Available to Attack');
