@@ -193,7 +193,7 @@ function addLukeSkywalker(availableCharactersRow) {
 
 function addObiWanKenobi(availableCharactersRow) {
   var obiWanColumn = $('<div>');
-  obiWanColumn.addClass('col-xs-6 col-sm-3 character skywalker');
+  obiWanColumn.addClass('col-xs-6 col-sm-3 character kenobi');
   obiWanColumn.attr('data-hp', obiWanKenobi.health);
   availableCharactersRow.append(obiWanColumn);
   // add thumbnail
@@ -222,7 +222,7 @@ function addObiWanKenobi(availableCharactersRow) {
 
 function addEmperorPalpatine(availableCharactersRow) {
   var emperorColumn = $('<div>');
-  emperorColumn.addClass('col-xs-6 col-sm-3 character skywalker');
+  emperorColumn.addClass('col-xs-6 col-sm-3 character palpatine');
   emperorColumn.attr('data-hp', emperorPalpatine.health);
   availableCharactersRow.append(emperorColumn);
   // add thumbnail
