@@ -21,6 +21,7 @@ $(document).ready(function() {
     selectYourCharacter();
     selectDefender();
     attackDefender();
+    restartGame();
   }
 
   function selectYourCharacter() {
@@ -96,6 +97,12 @@ $(document).ready(function() {
 
       checkForDefenderDeath();
       checkResult();
+    });
+  }
+
+  function restartGame() {
+    $('.restart').on('click', function() {
+      reset();
     });
   }
 

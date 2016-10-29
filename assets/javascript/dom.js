@@ -36,6 +36,8 @@ function resetDom() {
   defenderColumn = addDefenderColumn(chosenCharactersRow);
   // add attack button to defenderColumn
   addAttackButton(defenderColumn);
+  // add restart button
+  addRestartButton(defenderColumn);
 
   // add heading for enemyCharactersRow
   addEnemyCharactersHeading(enemyCharactersRow);
@@ -286,6 +288,21 @@ function addAttackButton(defenderColumn) {
     '<br class="visible-xs">' +
     '<br class="visible-xs">' +
     '<br class="visible-xs">'
+  );
+}
+
+function addRestartButton(defenderColumn) {
+  var restartButton = $('<button>');
+  restartButton.addClass('btn btn-default restart pull-left');
+  restartButton.text('Restart');
+  // append restartButton to defenderColumn
+  defenderColumn.append(restartButton);
+  // add some breaks so things look appealing
+  // these only matter for xs views
+  defenderColumn.append(
+    '<br>' +
+    '<br>' +
+    '<br>'
   );
 }
 
