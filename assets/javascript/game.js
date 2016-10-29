@@ -78,6 +78,16 @@ $(document).ready(function() {
       yourCharacterExperience++;
       // increase yourCharacterAttack based on yourCharacterExperience
       updatedAttack = yourCharacterExperience * yourCharacterAttack;
+      // show player what's happening
+      // make sure to clear it first
+      $('.stats').html('');
+      // add stats
+      $('.stats').append(
+        '<p>You attacked with ' + updatedAttack +' points</p>'
+      );
+      $('.stats').append(
+        '<p>You were hit with ' + defenderAttack + ' points</p>'
+      );
       // reduce defenderHealth by updatedAttack
       defenderHealth = defenderHealth - updatedAttack;
       // update health stats on characters

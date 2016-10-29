@@ -9,9 +9,10 @@ function resetDom() {
   // the column for game play
   gameColumn = addGameColumn(row);
 
-  // add rows for three game board areas
+  // add rows for four game board areas
   availableCharactersRow = addAvailableCharactersRow(gameColumn);
   chosenCharactersRow = addChosenCharactersRow(gameColumn);
+  addStatsRow(gameColumn);
   enemyCharactersRow = addEnemyCharactersRow(gameColumn);
 
   // populate available characters row
@@ -105,6 +106,13 @@ function addChosenCharactersRow(gameColumn) {
   // add chosenCharactersRow to gameColumn
   gameColumn.append(chosenCharactersRow);
   return chosenCharactersRow;
+}
+
+function addStatsRow(gameColumn) {
+  var statsRow = $('<div>');
+  statsRow.addClass('row stats text-center');
+  // add to gameColumn
+  gameColumn.append(statsRow);
 }
 
 function addEnemyCharactersRow(gameColumn) {
