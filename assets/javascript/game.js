@@ -6,7 +6,6 @@ $(document).ready(function() {
   resetDom();
   // play the damn game
   playGame();
-
 });
 
 // define variables
@@ -28,7 +27,6 @@ function playGame() {
 function selectYourCharacter() {
   // listen for click of character in .available-characters
   $('.available-characters').on('click', '.character', function() {
-    console.log("Hello");
     // remove hidden class for .your-character and .enemy-characters
     $('.your-character').removeClass('hidden');
     $('.enemy-characters').removeClass('hidden');
